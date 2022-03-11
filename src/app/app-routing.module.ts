@@ -11,7 +11,7 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
   {
-    path: 'connexion',
+    path: '',
     loadChildren: () => 
     import('./connexion/connexion.module').then((m) => m.ConnexionPageModule),
     ...canActivate(redirectLoggedInToHome)
@@ -23,8 +23,8 @@ const routes: Routes = [
     ...canActivate(redirectLoggedInToLoggin)
   },
   {
-    path: '',
-    redirectTo: 'home',
+    path: '**',
+    redirectTo: '',
     pathMatch: 'full'
   },
 ];
