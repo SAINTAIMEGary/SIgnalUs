@@ -6,7 +6,7 @@ import {
   canActivate,
 } from '@angular/fire/auth-guard';
 
-const redirectLoggedInToLoggin = () => redirectLoggedInTo(['']);
+const redirectUnauthorizedToLoggin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
@@ -20,7 +20,7 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => 
     import('./home/home.module').then((m) => m.HomePageModule),
-    ...canActivate(redirectLoggedInToLoggin)
+    ...canActivate(redirectUnauthorizedToLoggin)
   },
   {
     path: '**',
