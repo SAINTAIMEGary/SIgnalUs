@@ -1,24 +1,32 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Signal Us</ion-title>
-  </ion-toolbar>
+  <ion-button fill="clear" color="light">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </ion-button>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="credentials" (ngSubmit)="connexion()">
+  <div class="headimg"><img src="https://www.frbtp.re/template/charte/imgs/logo-white.png"></div>
+  <ion-card>
+    <form [formGroup]="credentials" (ngSubmit)="connexion()">
 
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
-      <ion-note slot="error" *ngIf="(email.dirty || email.touched) && email.errors">Email incorrect</ion-note>
-    </ion-item>
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="email" placeholder="Identifiant ou Adresse E-mail" formControlName="email"></ion-input>
+        <ion-note slot="error" *ngIf="(email.dirty || email.touched) && email.errors">Email incorrect</ion-note>
+      </ion-item>
 
-    <ion-item fill="solid" class="ion-margin-bottom">
-      <ion-input type="password" placeholder="Mot de passe" formControlName="motdepasse"></ion-input>
-      <ion-note slot="error" *ngIf="(motdepasse.dirty || motdepasse.touched) && motdepasse.errors">Mot de passe incorrect</ion-note>
-    </ion-item>
-    
-    <ion-button type="sunbmit" [disabled]="!credentials.valid" (click)="connexion()" color="success" expand="full">Connexion<ion-icon name="log-in"></ion-icon></ion-button>
-    <ion-button type="button" (click)="sinscrire()" color="warning" expand="full">Inscription<ion-icon name="person-add"></ion-icon></ion-button>
-  
-  </form>
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="password" placeholder="Mot de passe" formControlName="motdepasse"></ion-input>
+        <ion-note slot="error" *ngIf="(motdepasse.dirty || motdepasse.touched) && motdepasse.errors">Mot de passe
+          incorrect</ion-note>
+      </ion-item>
+
+    </form>
+  </ion-card>
+
+  <ion-button type="sunbmit" [disabled]="!credentials.valid" (click)="connexion()" color="success" expand="block">
+    Se connecter <ion-icon name="log-in"></ion-icon>
+  </ion-button>
+
+  <ion-button id="mdp" fill="clear" color="light">Mot de passe oublié ?</ion-button>
+
 </ion-content>

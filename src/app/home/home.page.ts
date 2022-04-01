@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { AvatarService } from '../services/avatar.service';
-import { Camera, CameraResultType, CameraSource  } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +12,10 @@ import { Camera, CameraResultType, CameraSource  } from '@capacitor/camera';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  profile= null;
+  profile = null;
 
   constructor(
+    private menu: MenuController,
     private avatarService: AvatarService,
     private authService: AuthService,
     private router: Router,
@@ -25,6 +27,11 @@ export class HomePage {
     });
   }
 
+  openFirst() {
+    this.menu.enable(true, 'first');
+    this.menu.open('first');
+  }
+
   async deconnexion() {
     await this.authService.deconnexion();
     this.router.navigateByUrl('/', { replaceUrl: true });
@@ -32,7 +39,7 @@ export class HomePage {
 
   async changeImage() {
     const image = await Camera.getPhoto({
-      quality:90,
+      quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Base64,
       source: CameraSource.Photos,

@@ -1,26 +1,71 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-    <ion-button (click)="deconnexion()">
-      <ion-icon slot="icon-only" name="log-out"></ion-icon>
-      Cliquez ici
-    </ion-button>
-    </ion-buttons>
-    <ion-title>
-      Mon Profil
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
-  <div class="preview">
-    <ion-avatar (click)="changeImage()">
-      <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl" />
-      <ng-template #placeholder_avatar>
-        <div class="fallback">
-          <p>Choissisez un Avatar</p>
-        </div>
-      </ng-template>
-    </ion-avatar>
-  </div>
+
+  <ion-menu side="start" menuId="first" contentId="main">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Profil</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <div class="preview">
+      <ion-avatar (click)="changeImage()">
+        <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl" />
+        <ng-template #placeholder_avatar>
+          <div class="fallback">
+            <p>Choissisez un Avatar</p>
+          </div>
+        </ng-template>
+      </ion-avatar>
+    </div>
+
+    <ion-content>
+      <ion-list>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+      </ion-list>
+    </ion-content>
+
+    <ion-button (click)="deconnexion()" color="danger" expand="block">
+      <ion-icon slot="end" name="power-outline"></ion-icon>
+      Déconnexion
+    </ion-button>
+  </ion-menu>
+
+  <ion-tabs>
+    <ion-fab vertical="bottom" horizontal="center" translucent="true">
+      <ion-router-outlet id="main"></ion-router-outlet>
+      <ion-fab-button (click)="openFirst()">
+        <img *ngIf="profile?.imageUrl;" [src]="profile.imageUrl" />
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-tab-button tab="tab-encounters">
+        <ion-icon name="newspaper-outline"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button tab="tab-conversations" class="comments">
+        <ion-icon name="pricetags-outline"></ion-icon>
+        <ion-badge *ngIf="new_message">{{new_message}}</ion-badge>
+      </ion-tab-button>
+
+      <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd">
+        </path>
+      </svg>
+
+      <ion-tab-button tab="tab-notifications" class="notifs">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-badge *ngIf="new_activities">{{new_activities}}</ion-badge>
+      </ion-tab-button>
+
+      <ion-tab-button tab="tab-profile">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
 </ion-content>
